@@ -5,6 +5,7 @@ from django.contrib.auth.forms import  AuthenticationForm
 from django.forms.widgets import ClearableFileInput
 from .models import UserProfile, AdminProfile
 from .models import VehicleRegistration
+# Update forms
 
 class VehicleRegistrationForm(forms.ModelForm):
     class Meta:
