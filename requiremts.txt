@@ -1,0 +1,35 @@
+# Framework
+Flask==2.3.2  # or Django==4.2.5 if using Django
+
+# Database
+SQLAlchemy==2.0.6  # For Flask
+Flask-SQLAlchemy==3.0.5  # For Flask
+psycopg2-binary==2.9.8  # PostgreSQL database adapter (replace if using another DB like MySQL)
+
+# Form handling and validation
+Flask-WTF==1.1.1  # For Flask form handling
+
+# Email notifications
+Flask-Mail==0.9.1  # For Flask
+django-smtp-email==1.0.0  # If using Django
+
+# Security
+Flask-Bcrypt==1.0.1  # For password hashing in Flask
+Flask-Login==0.6.3  # User session management for Flask
+Django-allauth==0.54.0  # For Django authentication and account management
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Additional utilities
+requests==2.31.0  # For API calls if required
+gunicorn==20.1.0  # Production WSGI server
+pillow==10.1.0  # Image handling, if needed
+validators==0.21.1  # For input validation
+
+# Frontend integration
+Flask-Cors==3.0.10  # Cross-Origin Resource Sharing for Flask APIs
+django-cors-headers==4.1.0  # For Django APIs
+
+# Logging and Debugging
+Flask-DebugToolbar==1.1.0
