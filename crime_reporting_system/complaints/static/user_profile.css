@@ -1,0 +1,127 @@
+/* user_profile.css */
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.profile-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+    background-color: #48C9B0;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.profile-details {
+    padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.profile-details p {
+    margin-bottom: 1rem;
+}
+
+.photo-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.user-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #48C9B0;
+}
+
+.document-section {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.document-img {
+    width: 100px;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details strong {
+    color: #48C9B0;
+}
+
+.profile-details p {
+    background-color: #f7f7f7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details p:hover {
+    background-color: #e8f4f1;
+}
+.edit-profile-button {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #48C9B0;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1abc9c;
+    transform: scale(1.05);
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head><title>Completed Cases</title></head>
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Body Styling */
+    body {
+        background: #f4f7fc;
+        color: #333;
+        padding: 30px;
+    }
+
+    /* Header Styling */
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        color: #1a73e8;
+        margin-bottom: 30px;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Table Header Styling */
+    th {
+        background-color: #007bff;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /* Table Cell Styling */
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 16px;
+    }
+
+    /* Alternate Row Color for Better Readability */
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Hover Effect on Table Rows */
+    tbody tr:hover {
+        background-color: #e2f4ff;
+        cursor: pointer;
+    }
+
+    /* Last Table Row Styling */
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Status Cell Styling */
+    td:last-child {
+        font-weight: bold;
+        color: #28a745; /* Default green for 'Update Status' */
+    }
+
+    /* Custom Styling for Different Statuses */
+    td:last-child:contains('Pending') {
+        color: #ffc107;
+    }
+
+    td:last-child:contains('Resolved') {
+        color: #28a745;
+    }
+
+    td:last-child:contains('In Progress') {
+        color: #007bff;
+    }
+
+    /* Responsive Design for Small Screens */
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-size: 28px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+
+        td, th {
+            padding: 10px;
+        }
+    }
+</style>
+<body>
+    <h1>Completed Cases</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Date of Birth</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Parent Name</th>
+                <th>Citizenship No</th>
+                <th>Incident Type</th>
+                <th>Incident Time</th>
+                <th>Incident Date</th>
+                <th>Incident Description</th>
+                <th>Update Status</th>
+            </tr>
+        </thead>
+        <tbody>
+              {% for complaint in complaints %}
+             <tr>
+                <td>{{ complaint.full_name }}</td>
+                <td>{{ complaint.date_of_birth }}</td>
+                <td>{{ complaint.age }}</td>
+                <td>{{ complaint.gender }}</td>
+                <td>{{ complaint.parent_name }}</td>
+                <td>{{ complaint.citizenship_no }}</td>
+                <td>{{ complaint.incident_type }}</td>
+                <td>{{ complaint.incident_time }}</td>
+                <td>{{ complaint.incident_date }}</td>
+                <td>{{ complaint.incident_description }}</td>
+                <td>{{ complaint.status }}</td>
+             </tr>
+             {% endfor %}
+            </tbody>
+    </table>
+</body>
+</html>

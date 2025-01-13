@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Complaint</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body and background styling */
+        body {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        /* Container to center the form */
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Title styling */
+        h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #f1f1f1;
+            margin-bottom: 20px;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Label styling */
+        label {
+            display: block;
+            font-size: 16px;
+            color: #f1f1f1;
+            margin-bottom: 8px;
+        }
+
+        /* Input and Textarea Styling */
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            color: #333;
+            transition: 0.3s ease;
+        }
+
+        /* Focus effect for inputs */
+        input:focus, select:focus, textarea:focus {
+            border: 1px solid #1cc88a;
+            background-color: #f9f9f9;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #1cc88a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Hover effect for button */
+        button:hover {
+            background-color: #17a673;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            h2 {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+
+        /* Subtle fade-in animation */
+        body {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>Add Complaint</h2>
+        <form method="post" enctype="multipart/form-data" action="{% url 'add_complaint' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name">Full Name:</label>
+                {{ form.full_name }}
+            </div>
+            
+            <div class="form-group">
+                <label for="date_of_birth">Date of Birth:</label>
+                {{ form.date_of_birth }}
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age:</label>
+                {{ form.age }}
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                {{ form.gender }}
+            </div>
+            
+            <div class="form-group">
+                <label for="phone_number">Phone Number:</label>
+                {{ form.phone_number }}
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                {{ form.email }}
+            </div>
+            
+            <div class="form-group">
+                <label for="parent_name">Parent Name:</label>
+                {{ form.parent_name }}
+            </div>
+            
+            <div class="form-group">
+                <label for="citizenship_no">Citizenship Number:</label>
+                {{ form.citizenship_no }}
+            </div>
+            
+            <div class="form-group">
+                <label for="incident_type">Incident Type:</label>
+                {{ form.incident_type }}
+            </div>
+            
+            <div class="form-group">
+                <label for="incident_time">Incident Time:</label>
+                {{ form.incident_time }}
+            </div>
+            
+            <div class="form-group">
+                <label for="incident_date">Incident Date:</label>
+                {{ form.incident_date }}
+            </div>
+            
+            <div class="form-group">
+                <label for="incident_description">Incident Description:</label>
+                {{ form.incident_description }}
+            </div>
+            
+            <div class="form-group">
+                <label for="sound_recorder">Sound Recorder (Optional):</label>
+                {{ form.sound_recorder }}
+            </div>
+            
+            <div class="form-group">
+                <label for="evidence_1">Upload Evidence First:</label>
+                {{ form.evidence_1 }}
+            </div>
+            
+            <div class="form-group">
+                <label for="evidence_2">Upload Evidence Second:</label>
+                {{ form.evidence_2 }}
+            </div>
+            
+            <div class="form-group">
+                <label for="evidence_3">Upload Evidence Third:</label>
+                {{ form.evidence_3 }}
+            </div>
+            
+            <div class="form-group">
+                <label for="evidence_4">Upload Evidence Fourth:</label>
+                {{ form.evidence_4 }}
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit Complaint</button>
+        </form>
+    </div>
+
+</body>
+</html>

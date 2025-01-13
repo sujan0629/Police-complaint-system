@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Verification</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Set a nice background and center the content */
+        body {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        /* Title style */
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+
+        /* Form container styling */
+        form {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the form fields */
+        form input, form select, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        /* Focus effect on form elements */
+        form input:focus, form select:focus, form textarea:focus {
+            border: 2px solid #1cc88a;
+            background-color: #f1f1f1;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #1cc88a;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            padding: 15px;
+        }
+
+        button:hover {
+            background-color: #17a673;
+            transform: scale(1.05);
+        }
+
+        /* Responsive styling */
+        @media screen and (max-width: 600px) {
+            h2 {
+                font-size: 28px;
+            }
+
+            form {
+                padding: 20px;
+                width: 80%;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+
+        /* Subtle fade-in animation */
+        body {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>User Verification</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

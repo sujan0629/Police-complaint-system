@@ -1,0 +1,192 @@
+<h2 class="search-heading">Search Vehicle</h2>
+
+<!-- Search Form -->
+<form method="post" class="search-form">
+    {% csrf_token %}
+    <label for="vehicle_no" class="label">Vehicle Number:</label>
+    <input type="text" name="vehicle_no" required class="input-field">
+    <button type="submit" class="search-btn">Search</button>
+</form>
+<style>
+    /* General styles for headings */
+    .search-heading {
+        text-align: center;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        margin-bottom: 20px;
+        font-size: 2rem;
+    }
+
+    .vehicle-heading {
+        color: #4CAF50;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 10px;
+    }
+
+    /* Form styling */
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #4CAF50;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    .label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .input-field {
+        padding: 10px;
+        font-size: 1rem;
+        width: 100%;
+        border: 1px solid #4CAF50;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+    }
+
+    .input-field:focus {
+        border-color: #45a049;
+        outline: none;
+    }
+
+    .search-btn {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+        background-color: #45a049;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Styling for the Vehicle Info section */
+    .vehicle-info {
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+    }
+
+    .vehicle-info p {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .nepali-font {
+        font-family: 'Preeti', sans-serif;
+    }
+
+    /* Image styling */
+    .vehicle-image {
+        max-width: 200px;
+        margin: 10px 0;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .vehicle-image:hover {
+        transform: scale(1.05);
+    }
+
+    /* Download button styling */
+    .btn-download {
+        background-color: #008CBA;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-download:hover {
+        background-color: #007B9F;
+        transform: scale(1.05);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .search-form {
+            width: 90%;
+            padding: 15px;
+        }
+
+        .vehicle-info {
+            padding: 15px;
+        }
+
+        .vehicle-info p {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<!-- Display Information -->
+{% if vehicle %}
+    <hr>
+    <h3 class="vehicle-heading">Vehicle Information</h3>
+    <div class="vehicle-info">
+        <p><strong>Full Name:</strong> {{ vehicle.full_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ vehicle.date_of_birth }}</p>
+        <p><strong>Age:</strong> {{ vehicle.age }}</p>
+        <p><strong>Gender:</strong> {{ vehicle.get_gender_display }}</p>
+
+        <h4>Contact Information</h4>
+        <p><strong>Phone Number:</strong> {{ vehicle.phone_number }}</p>
+        <p><strong>Email:</strong> {{ vehicle.email }}</p>
+
+        <h4>Identification Information</h4>
+        <p><strong>Citizenship Number:</strong> {{ vehicle.citizenship_no }}</p>
+        <p><strong>License Number:</strong> {{ vehicle.licence_no }}</p>
+
+        <h4>Vehicle Details</h4>
+        <p><strong>Bought From:</strong> {{ vehicle.bought_from }}</p>
+        <p><strong>Engine Number:</strong> {{ vehicle.engine_no }}</p>
+        <p><strong>Vehicle Number:</strong> <span class="nepali-font">{{ vehicle.vehicle_no }}</span></p>
+        <p><strong>Transport Type:</strong> {{ vehicle.get_transpo_type_display }}</p>
+        <p><strong>Bought Date:</strong> {{ vehicle.bought_date }}</p>
+
+        <h4>Location Information</h4>
+        <p><strong>District:</strong> {{ vehicle.district }}</p>
+        <p><strong>Province:</strong> {{ vehicle.province }}</p>
+        <p><strong>City Name:</strong> {{ vehicle.city_name }}</p>
+        <p><strong>Ward:</strong> {{ vehicle.ward }}</p>
+        <p><strong>Tole Name:</strong> {{ vehicle.tole_name }}</p>
+
+        <h4>Uploaded Documents</h4>
+        <p><strong>Front Citizenship:</strong> <img src="{{ vehicle.front_citizenship.url }}" alt="Front Citizenship" class="vehicle-image"></p>
+        <p><strong>Back Citizenship:</strong> <img src="{{ vehicle.back_citizenship.url }}" alt="Back Citizenship" class="vehicle-image"></p>
+        <p><strong>User Photo:</strong> <img src="{{ vehicle.user_photo.url }}" alt="User Photo" class="vehicle-image"></p>
+
+        <h4>Vehicle Papers</h4>
+        {% if vehicle.vehicle_papers %}
+            <p><strong>Vehicle Papers:</strong> <a href="{{ vehicle.vehicle_papers.url }}" target="_blank" class="btn-download">Download</a></p>
+        {% else %}
+            <p>No vehicle papers uploaded.</p>
+        {% endif %}
+
+        <h4>Vehicle Photos</h4>
+        <p><strong>Front Side:</strong> <img src="{{ vehicle.vehicle_front_photo.url }}" alt="Front Side" class="vehicle-image"></p>
+        <p><strong>Back Side:</strong> <img src="{{ vehicle.vehicle_back_photo.url }}" alt="Back Side" class="vehicle-image"></p>
+        <p><strong>Left Side:</strong> <img src="{{ vehicle.vehicle_left_photo.url }}" alt="Left Side" class="vehicle-image"></p>
+        <p><strong>Right Side:</strong> <img src="{{ vehicle.vehicle_right_photo.url }}" alt="Right Side" class="vehicle-image"></p>
+    </div>
+{% endif %}

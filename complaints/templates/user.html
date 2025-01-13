@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Crime Reporting System</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'><link rel="stylesheet" href="{% static '/style.css' %}">
+</head>
+<body>
+    <div id="nav-bar">
+        <input id="nav-toggle" type="checkbox"/>
+        <div id="nav-header"><a id="nav-title" href="https://codepen.io" target="_blank">S<i class="fab fa-codepen"></i>aahas</a>
+          <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+          <hr/>
+        </div>
+        <div id="nav-content">
+          <a href="{% url 'add_complaint' %}" class="nav-button">
+            <i class="fas fa-palette"></i><span>Add Complaint</span>
+        </a>
+        <a href="{% url 'view_complaints' %}" class="nav-button">
+            <i class="fas fa-images"></i><span>View Complaint Status</span>
+        </a>
+        <a href="{% url 'register_crime' %}" class="nav-button">
+          <i class="fas fa-images"></i><span>Use AI </span>
+      </a>
+          
+          <div id="nav-content-highlight"></div>
+        </div>
+        <input id="nav-footer-toggle" type="checkbox"/>
+        <div id="nav-footer">
+          <div id="nav-footer-heading">
+            <div id="nav-footer-avatar">
+              
+              <img src="" alt="Admin Photo" width="100" height="100">
+          
+            
+         
+            </div>
+            <div id="nav-footer-titlebox"><a id="nav-footer-title" href="{% url 'user_profile' %}" target="_blank">User</a><span id="nav-footer-subtitle">User</span></div>
+            <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
+          </div>
+      
+        </div>
+      </div>
+ </body>
+<!-- add this script in base.html or wherever appropriate -->
+<script>
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          // Sending the user's location to the backend
+          fetch('/capture_location/', {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({latitude: latitude, longitude: longitude}),
+          });
+      });
+  } else {
+      alert("Geolocation is not supported by this browser.");
+  }
+</script>
+
+
+</html>

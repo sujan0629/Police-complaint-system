@@ -1,0 +1,40 @@
+<!-- complaints/templates/admin_custom_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .login-container { max-width: 400px; margin: 0 auto; padding: 1em; border: 1px solid #ddd; }
+        h1 { text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 8px; }
+        .submit-btn { width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; }
+        .submit-btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Admin Login</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
+    </div>
+</body>
+</html>

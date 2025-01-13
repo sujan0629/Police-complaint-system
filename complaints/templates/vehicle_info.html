@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        hr {
+            border: 1px solid #fff;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        h3, h4 {
+            color: #ffdd57;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: #ff8c00;
+        }
+
+        img {
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        .info-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-item {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            width: 48%;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-item p {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .info-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .vehicle-images img {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .vehicle-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .vehicle-images p {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .vehicle-images p strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-item {
+                width: 100%;
+            }
+
+            .vehicle-images {
+                flex-direction: column;
+            }
+
+            .vehicle-images img {
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
+
+        /* Cool Hover Effects */
+        h1:hover {
+            color: #ff8c00;
+            text-decoration: underline;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <h1>Vehicle Details</h1>
+    <hr>
+    <h3>Owner Information</h3>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>Full Name:</strong> {{ vehicle.full_name }}</p>
+            <p><strong>Date of Birth:</strong> {{ vehicle.date_of_birth }}</p>
+            <p><strong>Age:</strong> {{ vehicle.age }}</p>
+            <p><strong>Gender:</strong> {{ vehicle.get_gender_display }}</p>
+        </div>
+    </div>
+
+    <h4>Contact Information</h4>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>Phone Number:</strong> {{ vehicle.phone_number }}</p>
+            <p><strong>Email:</strong> {{ vehicle.email }}</p>
+        </div>
+    </div>
+
+    <h4>Identification Information</h4>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>Citizenship Number:</strong> {{ vehicle.citizenship_no }}</p>
+            <p><strong>License Number:</strong> {{ vehicle.licence_no }}</p>
+        </div>
+    </div>
+
+    <h4>Vehicle Details</h4>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>Bought From:</strong> {{ vehicle.bought_from }}</p>
+            <p><strong>Engine Number:</strong> {{ vehicle.engine_no }}</p>
+            <p><strong>Vehicle Number:</strong> <span style="font-family: 'Preeti', sans-serif;">{{ vehicle.vehicle_no }}</span></p>
+            <p><strong>Transport Type:</strong> {{ vehicle.get_transpo_type_display }}</p>
+            <p><strong>Bought Date:</strong> {{ vehicle.bought_date }}</p>
+        </div>
+    </div>
+
+    <h4>Location Information</h4>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>District:</strong> {{ vehicle.district }}</p>
+            <p><strong>Province:</strong> {{ vehicle.province }}</p>
+            <p><strong>City Name:</strong> {{ vehicle.city_name }}</p>
+            <p><strong>Ward:</strong> {{ vehicle.ward }}</p>
+            <p><strong>Tole Name:</strong> {{ vehicle.tole_name }}</p>
+        </div>
+    </div>
+
+    <h4>Uploaded Documents</h4>
+    <div class="info-container">
+        <div class="info-item">
+            <p><strong>Front Citizenship:</strong> <img src="{{ vehicle.front_citizenship.url }}" alt="Front Citizenship"></p>
+            <p><strong>Back Citizenship:</strong> <img src="{{ vehicle.back_citizenship.url }}" alt="Back Citizenship"></p>
+            <p><strong>User Photo:</strong> <img src="{{ vehicle.user_photo.url }}" alt="User Photo"></p>
+        </div>
+    </div>
+
+    <h4>Vehicle Papers</h4>
+    <div class="info-container">
+        {% if vehicle.vehicle_papers %}
+            <div class="info-item">
+                <p><strong>Vehicle Paper:</strong> <a href="{{ vehicle.vehicle_papers.url }}" target="_blank">Download</a></p>
+            </div>
+        {% else %}
+            <p>No vehicle papers uploaded.</p>
+        {% endif %}
+    </div>
+    
+
+    <h4>Vehicle Photos</h4>
+    <div class="vehicle-images">
+        <p><strong>Front Side:</strong> <img src="{{ vehicle.vehicle_front_photo.url }}" alt="Front Side"></p>
+        <p><strong>Back Side:</strong> <img src="{{ vehicle.vehicle_back_photo.url }}" alt="Back Side"></p>
+        <p><strong>Left Side:</strong> <img src="{{ vehicle.vehicle_left_photo.url }}" alt="Left Side"></p>
+        <p><strong>Right Side:</strong> <img src="{{ vehicle.vehicle_right_photo.url }}" alt="Right Side"></p>
+    </div>
+</body>
+</html>

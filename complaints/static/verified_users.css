@@ -1,0 +1,174 @@
+/* General Styles for the Page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.users-table th, .users-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.users-table th {
+    background-color: #2196F3;
+    color: white;
+}
+
+.users-table td {
+    background-color: #fff;
+}
+
+/* Button Styling for "View Full Details" */
+.view-details-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.view-details-btn:hover {
+    background-color: #45a049;
+}
+
+/* Full Details Section (Hidden by Default) */
+.details-row {
+    display: none;
+}
+
+.details-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-content h3 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.details-content p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.details-content p strong {
+    color: #2196F3; /* Blue color for labels */
+    font-weight: 600;
+}
+
+.photo-img {
+    max-width: 150px;
+    margin-top: 10px;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Link to Admin Verification Page */
+.admin-link {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    padding: 12px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+}
+
+.admin-link:hover {
+    background-color: #1976D2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .users-table th, .users-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .view-details-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .details-content {
+        font-size: 14px;
+    }
+
+    .photo-img {
+        max-width: 100px;
+    }
+
+    .admin-link {
+        width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .users-table {
+        font-size: 12px;
+    }
+
+    .view-details-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .details-content {
+        font-size: 12px;
+    }
+
+    .photo-img {
+        max-width: 80px;
+    }
+
+    .admin-link {
+        font-size: 14px;
+    }
+}

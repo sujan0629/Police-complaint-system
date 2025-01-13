@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Admin Profile</title>
+    <link rel="stylesheet" href="{% static 'edit_admin_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2>Edit Admin Profile</h2>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+                <!-- Form to Edit Admin Profile -->
+                {{ form.as_p }}
+
+                <div class="form-buttons">
+                    <button type="submit">Save Changes</button>
+                    <a href="{% url 'admin_profile' %}">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

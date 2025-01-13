@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Case Status</title>
+    <style>
+        /* General Page Layout */
+        body {
+            background-color: #f4f7fc;
+            padding-top: 50px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #343a40;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Elements */
+        label {
+            display: block;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Select Dropdown Styles */
+        select {
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #007bff;
+            background-color: #ffffff;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black overlay */
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .modal-body {
+            font-size: 16px;
+            padding: 15px 0;
+        }
+
+        .modal-footer {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Update Status for: {{ complaint.title }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="pending" {% if complaint.status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="completed" {% if complaint.status == 'completed' %}selected{% endif %}>Completed</option>
+            </select>
+            
+            <button type="submit">Update Status</button>
+        </form>
+
+        <!-- Button to trigger modal -->
+        <button type="button" id="viewComplaintDetailsBtn">View Complaint Details</button>
+    </div>
+
+    <!-- Modal for Complaint Details -->
+    <div class="modal" id="complaintModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="modal-title">Complaint Details</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Dynamic content can be displayed here -->
+                <p><strong>Full Name:</strong> {{ complaint.full_name }}</p>
+                <p><strong>Incident Description:</strong> {{ complaint.incident_description }}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get Modal, button to open it, and the close button
+        var modal = document.getElementById('complaintModal');
+        var btn = document.getElementById("viewComplaintDetailsBtn");
+        var closeBtn = document.getElementsByClassName("close")[0];
+        var closeModalBtn = document.getElementsByClassName("modal-close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks the close button (×), close the modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks the "Close" button in the modal footer, close the modal
+        closeModalBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

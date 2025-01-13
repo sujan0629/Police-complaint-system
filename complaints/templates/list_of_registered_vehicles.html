@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Registered Vehicles</title>
+    <link rel="stylesheet" href="{% static 'verified_users.css' %}">
+</head>
+<body>
+    <div class="container">
+       <h1>Registered Vehicles</h1>
+       
+         <table class="users-table">
+           <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Full Name</th>
+                <th>Vehicle Number</th>
+                <th>Vehicle Type</th>
+                <th>Phone Number</th>
+                <th>License Number</th>
+                <th>Citizenship Number</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ vehicle.full_name }}</td>
+                <td><span style="font-family: 'Preeti', sans-serif;">{{ vehicle.vehicle_no }}</span></td>
+                <td>{{ vehicle.get_transpo_type_display }}</td>
+                <td>{{ vehicle.phone_number }}</td>
+                <td>{{ vehicle.licence_no }}</td>
+                <td>{{ vehicle.citizenship_no }}</td>
+                <td>{{ vehicle.get_gender_display }}</td>
+                <td>
+                    <a href="{% url 'view_vehicle_details' vehicle.id %}" class="view-details-btn">View Full Details</a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+<style>
+    .view-details-btn {
+        display: inline-block;
+        background-color: #4CAF50; /* Green background */
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .view-details-btn:hover {
+        background-color: #45a049; /* Slightly darker green */
+        transform: translateY(-3px); /* Makes the button pop */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+    }
+
+    .view-details-btn:active {
+        background-color: #388e3c; /* Darker green on click */
+        transform: translateY(0); /* Button presses down */
+    }
+</style>

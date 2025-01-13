@@ -1,0 +1,40 @@
+<!-- templates/complaints/full_case_view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Case View</title>
+</head>
+<body>
+    <h2>Full Case Details</h2>
+    <p><strong>Full Name:</strong> {{ complaint.full_name }}</p>
+    <p><strong>Date of Birth:</strong> {{ complaint.date_of_birth }}</p>
+    <p><strong>Age:</strong> {{ complaint.age }}</p>
+    <p><strong>Gender:</strong> {{ complaint.gender }}</p>
+    <p><strong>Phone Number:</strong> {{ complaint.phone_number }}</p>
+    <p><strong>Email:</strong> {{ complaint.email }}</p>
+    <p><strong>Parent Name:</strong> {{ complaint.parent_name }}</p>
+    <p><strong>Citizenship No:</strong> {{ complaint.citizenship_no }}</p>
+    <p><strong>Incident Type:</strong> {{ complaint.incident_type }}</p>
+    <p><strong>Incident Time:</strong> {{ complaint.incident_time }}</p>
+    <p><strong>Incident Date:</strong> {{ complaint.incident_date }}</p>
+    <p><strong>Incident Description:</strong> {{ complaint.incident_description }}</p>
+
+    {% if complaint.sound_recorder %}
+    <p><strong>Sound Recorder:</strong> <a href="{{ complaint.sound_recorder.url }}" target="_blank">Download</a></p>
+    {% endif %}
+    {% if complaint.evidence_1 %}
+    <p><strong>Evidence 1:</strong> <a href="{{ complaint.evidence_1.url }}" target="_blank">Download</a></p>
+    {% endif %}
+    {% if complaint.evidence_2 %}
+    <p><strong>Evidence 2:</strong> <a href="{{ complaint.evidence_2.url }}" target="_blank">Download</a></p>
+    {% endif %}
+    {% if complaint.evidence_3 %}
+    <p><strong>Evidence 3:</strong> <a href="{{ complaint.evidence_3.url }}" target="_blank">Download</a></p>
+    {% endif %}
+    {% if complaint.evidence_4 %}
+    <p><strong>Evidence 4:</strong> <a href="{{ complaint.evidence_4.url }}" target="_blank">Download</a></p>
+    {% endif %}
+    <a href="{% url 'view_complaints' %}">Back to Complaints List</a>
+</body>
+</html>

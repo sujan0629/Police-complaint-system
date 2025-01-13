@@ -1,0 +1,114 @@
+/* edit_admin_profile.css */
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 2rem;
+}
+
+.profile-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+    background-color: #6c5ce7;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.profile-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.profile-form {
+    padding: 2rem;
+}
+
+.profile-form p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.profile-form input[type="file"] {
+    padding: 0;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.form-buttons button {
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+.form-buttons button:active {
+    transform: translateY(0);
+}
+
+.form-buttons .cancel-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.form-buttons .cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+.form-buttons button {
+    background-color: #6c5ce7;
+    color: #fff;
+}
+
+.form-buttons button:hover {
+    background-color: #a29bfe;
+}

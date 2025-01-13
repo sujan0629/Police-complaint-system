@@ -1,0 +1,142 @@
+<!-- templates/complaints/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<style>
+/* login.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: #333;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-box {
+    text-align: center;
+    width: 100%;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form p {
+    width: 100%;
+    font-size: 1rem;
+    color: #666;
+}
+
+.placeholder-text {
+    color: #888;
+    font-weight: bold;
+}
+
+button {
+    background: #6e8efb;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background: #5563e6;
+}
+
+p {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+p a {
+    color: #6e8efb;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+p a:hover {
+    color: #3a4bb1;
+}
+label {
+    display: block;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 8px;
+}
+
+/* Input and Textarea Styling */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+/* Focus effect for inputs */
+input:focus, select:focus, textarea:focus {
+    border: 1px solid #1cc88a;
+    background-color: #f9f9f9;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="login-box">
+         <h2>Login</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    </form>
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+</div>
+</div>
+</body>
+
+</html>

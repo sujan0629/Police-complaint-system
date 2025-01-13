@@ -1,0 +1,14 @@
+<div id="map" style="height: 600px;"></div>
+<script>
+    var map = L.map('map').setView([27.7, 85.3], 13);  // Default center (Nepal)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    {% for location in user_locations %}
+        L.marker([{{ location.latitude }}, {{ location.longitude }}]).addTo(map)
+            .bindPopup("User: {{ location.user.username }}")
+            .openPopup();
+    {% endfor %}
+</script>

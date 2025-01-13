@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+<style>
+    /* signup.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
+    color: #333;
+}
+
+.container {
+    background: #ffffff;
+    padding: 2.5rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form p {
+    width: 100%;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #6e8efb;
+    box-shadow: 0 0 8px rgba(110, 142, 251, 0.3);
+}
+
+button {
+    background: #6e8efb;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background: #5563e6;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+</body>
+</html>

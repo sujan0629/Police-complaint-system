@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Verification Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: #f4f7fc;
+            color: #333;
+            padding: 30px;
+        }
+
+        /* Header Styling */
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #1a73e8;
+            margin-bottom: 30px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Header Styling */
+        th {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /* Table Cell Styling */
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        /* Alternate Row Color for Better Readability */
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hover Effect on Table Rows */
+        tbody tr:hover {
+            background-color: #e2f4ff;
+            cursor: pointer;
+        }
+
+        /* Last Table Row Styling */
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Status Cell Styling */
+        td:last-child {
+            font-weight: bold;
+            color: #28a745; /* Default green for 'Update Status' */
+        }
+
+        /* Custom Styling for Different Statuses */
+        td:last-child:contains('Pending') {
+            color: #ffc107;
+        }
+
+        td:last-child:contains('Resolved') {
+            color: #28a745;
+        }
+
+        td:last-child:contains('In Progress') {
+            color: #007bff;
+        }
+
+        /* Responsive Design for Small Screens */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            td, th {
+                padding: 10px;
+            }
+        }
+
+        /* Styling for the "No Unverified Users" Message */
+        .no-users-box {
+            display: block;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Unverified Users</h2>
+
+    {% if unverified_users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Date of Birth</th>
+                    <th>District</th>
+                    <th>Province</th>
+                    <th>City Name</th>
+                    <th>Parent Name</th>
+                    <th>Phone No</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in unverified_users %}
+                    <tr>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.date_of_birth }}</td>
+                        <td>{{ user.district }}</td>
+                        <td>{{ user.province }}</td>
+                        <td>{{ user.city_name }}</td>
+                        <td>{{ user.parent_name }}</td>
+                        <td>{{ user.phone_number }}</td>
+                        <td>
+                            <!-- View Full Details Button -->
+                            <button class="view-details-btn" onclick="showDetails('{{ user.id }}')">View Full Details</button>
+
+                            <!-- Accept and Reject Buttons -->
+                            <a href="{% url 'accept_user' user.id %}" class="action-btn">Accept</a>
+                            <a href="{% url 'reject_user' user.id %}" class="action-btn reject-btn">Reject</a>
+                        </td>
+                    </tr>
+
+                    <!-- Full Details Section (Hidden by Default) -->
+                    <tr id="details-{{ user.id }}" style="display: none;">
+                        <td colspan="8">
+                            <h3>Full Details</h3>
+                            <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+                            <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+                            <p><strong>District:</strong> {{ user.district }}</p>
+                            <p><strong>Province:</strong> {{ user.province }}</p>
+                            <p><strong>City Name:</strong> {{ user.city_name }}</p>
+                            <p><strong>Ward:</strong> {{ user.ward }}</p>
+                            <p><strong>Tole Name:</strong> {{ user.tole_name }}</p>
+                            <p><strong>Phone No:</strong> {{ user.phone_number }}</p>
+                            <p><strong>Parent Name:</strong> {{ user.parent_name }}</p>
+                            <p><strong>User Photo:</strong> <img src="{{ user.user_photo.url }}" alt="Birth Certificate" width="100" /></p>
+                            <p><strong>Birth Certificate:</strong> <img src="{{ user.birth_certificate.url }}" alt="Birth Certificate" width="100" /></p>
+                            <p><strong>Citizenship (Front):</strong> <img src="{{ user.front_citizenship.url }}" alt="Citizenship Front" width="100" /></p>
+                            <p><strong>Citizenship (Back):</strong> <img src="{{ user.back_citizenship.url }}" alt="Citizenship Back" width="100" /></p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="no-users-box">
+            <p>No unverified users</p>
+        </div>
+    {% endif %}
+
+    <!-- Script to show/hide full details -->
+    <script>
+        function showDetails(userId) {
+            var detailsSection = document.getElementById('details-' + userId);
+            if (detailsSection.style.display === "none") {
+                detailsSection.style.display = "table-row";  // Display the full details row
+            } else {
+                detailsSection.style.display = "none";  // Hide the full details row
+            }
+        }
+    </script>
+</body>
+</html>

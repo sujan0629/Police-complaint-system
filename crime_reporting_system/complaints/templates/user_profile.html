@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'user_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2>User Profile</h2>
+            </div>
+
+            <div class="profile-details">
+                <div class="photo-section">
+                    {% if user_verification.user_photo %}
+                        <p><strong>Photo:</strong></p>
+                        <img src="{{ user_verification.user_photo.url }}" alt="User Photo" class="user-photo">
+                    {% else %}
+                        <p><strong>Photo:</strong> No photo uploaded.</p>
+                    {% endif %}
+                </div>
+
+                <p><strong>Full Name:</strong> {{ user_verification.full_name }}</p>
+                <p><strong>Date of Birth:</strong> {{ user_verification.date_of_birth }}</p>
+                <p><strong>Province:</strong> {{ user_verification.province }}</p>
+                <p><strong>District:</strong> {{ user_verification.district }}</p>
+                <p><strong>City Name:</strong> {{ user_verification.city_name }}</p>
+                <p><strong>Ward:</strong> {{ user_verification.ward }}</p>
+                <p><strong>Tole Name:</strong> {{ user_verification.tole_name }}</p>
+                <p><strong>Parent Name:</strong> {{ user_verification.parent_name }}</p>
+                <p><strong>Phone Number:</strong> {{ user_verification.phone_number }}</p>
+
+                <div class="document-section">
+                    <p><strong>Birth Certificate:</strong></p>
+                    <img src="{{ user_verification.birth_certificate.url }}" alt="Birth Certificate" class="document-img">
+                    <p><strong>Citizenship (Front):</strong></p>
+                    <img src="{{ user_verification.front_citizenship.url }}" alt="Citizenship Front" class="document-img">
+                    <p><strong>Citizenship (Back):</strong></p>
+                    <img src="{{ user_verification.back_citizenship.url }}" alt="Citizenship Back" class="document-img">
+                </div>
+            </div>
+
+            <!-- Add the Edit Profile Button -->
+            <div class="edit-profile-button">
+                <a href="{% url 'edit_user_profile' %}" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

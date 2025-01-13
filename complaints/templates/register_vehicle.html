@@ -1,0 +1,159 @@
+<div class="form-container">
+    <style> 
+        /* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #e9f0fa;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Form Container */
+.form-container {
+    width: 80%;
+    max-width: 1000px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Header */
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #4a90e2;
+}
+
+/* Fieldset Styling */
+fieldset {
+    margin-bottom: 1.5rem;
+    border: none;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+form p {
+    flex: 1 1 calc(50% - 1rem); /* Two fields per row */
+    margin: 0;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="date"],
+form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: #4a90e2;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #357abd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form p {
+        flex: 1 1 100%; /* Full width for each field */
+    }
+}
+
+    </style>
+    <h2>Register Vehicle</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Personal Details Section -->
+        <fieldset>
+            <legend>Personal Details</legend>
+            <div class="form-row">
+                <p>{{ form.full_name.label_tag }} {{ form.full_name }}</p>
+                <p>{{ form.date_of_birth.label_tag }} {{ form.date_of_birth }}</p>
+                <p>{{ form.age.label_tag }} {{ form.age }}</p>
+                <p>{{ form.gender.label_tag }} {{ form.gender }}</p>
+                <p>{{ form.phone_number.label_tag }} {{ form.phone_number }}</p>
+                <p>{{ form.email.label_tag }} {{ form.email }}</p>
+                <p>{{ form.citizenship_no.label_tag }} {{ form.citizenship_no }}</p>
+                <p>{{ form.licence_no.label_tag }} {{ form.licence_no }}</p>
+                <p>{{ form.bought_from.label_tag }} {{ form.bought_from }}</p>
+                <p>{{ form.engine_no.label_tag }} {{ form.engine_no }}</p>
+                <p>{{ form.vehicle_no.label_tag }} {{ form.vehicle_no }}</p>
+            </div>
+        </fieldset>
+
+        <!-- Vehicle Details Section -->
+        <fieldset>
+            <legend>Vehicle Details</legend>
+            <div class="form-row">
+                <p>{{ form.transpo_type.label_tag }} {{ form.transpo_type }}</p>
+                <p>{{ form.bought_date.label_tag }} {{ form.bought_date }}</p>
+                <p>{{ form.district.label_tag }} {{ form.district }}</p>
+                <p>{{ form.province.label_tag }} {{ form.province }}</p>
+                <p>{{ form.city_name.label_tag }} {{ form.city_name }}</p>
+                <p>{{ form.ward.label_tag }} {{ form.ward }}</p>
+                <p>{{ form.tole_name.label_tag }} {{ form.tole_name }}</p>
+            </div>
+        </fieldset>
+
+        <!-- File Uploads Section -->
+        <fieldset>
+            <legend>Documents and Photos</legend>
+            <div class="form-row">
+                <p>{{ form.front_citizenship.label_tag }} {{ form.front_citizenship }}</p>
+                <p>{{ form.back_citizenship.label_tag }} {{ form.back_citizenship }}</p>
+                <p>{{ form.user_photo.label_tag }} {{ form.user_photo }}</p>
+                <p>{{ form.vehicle_papers.label_tag }} {{ form.vehicle_papers }}</p>
+                <p>{{ form.vehicle_front_photo.label_tag }} {{ form.vehicle_front_photo }}</p>
+                <p>{{ form.vehicle_back_photo.label_tag }} {{ form.vehicle_back_photo }}</p>
+                <p>{{ form.vehicle_left_photo.label_tag }} {{ form.vehicle_left_photo }}</p>
+                <p>{{ form.vehicle_right_photo.label_tag }} {{ form.vehicle_right_photo }}</p>
+            </div>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

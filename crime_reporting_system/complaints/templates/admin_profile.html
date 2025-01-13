@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <link rel="stylesheet" href="{% static 'admin_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                {% if admin_profile.profile_picture %}
+                    <div class="profile-picture">
+                        <img src="{{ admin_profile.profile_picture.url }}" alt="Admin Picture">
+                    </div>
+                {% endif %}
+                <div class="profile-info">
+                    <h2>{{ admin_profile.name }}</h2>
+                    <p class="role">{{ admin_profile.post }}</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div class="detail-row">
+                    <p><strong>Caste:</strong> {{ admin_profile.caste }}</p>
+                    <p><strong>Phone Number:</strong> {{ admin_profile.phone_number }}</p>
+                </div>
+                <div class="detail-row">
+                    <p><strong>Email:</strong> {{ admin_profile.email }}</p>
+                    <p><strong>Marital Status:</strong> {{ admin_profile.marital_status }}</p>
+                </div>
+                <div class="detail-row">
+                    <p><strong>Citizenship No:</strong> {{ admin_profile.citizenship_no }}</p>
+                    <p><strong>Date of Birth:</strong> {{ admin_profile.date_of_birth }}</p>
+                </div>
+                <div class="detail-row">
+                    <p><strong>Temporary Address:</strong> {{ admin_profile.temp_address }}</p>
+                    <p><strong>Permanent Address:</strong> {{ admin_profile.perm_address }}</p>
+                </div>
+                <div class="detail-row">
+                    <p><strong>Age:</strong> {{ admin_profile.age }}</p>
+                </div>
+            </div>
+
+            <div class="edit-button">
+                <a href="{% url 'edit_admin_profile' %}">
+                    <button>Edit Profile</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

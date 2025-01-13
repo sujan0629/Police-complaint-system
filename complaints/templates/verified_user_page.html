@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Verified Users</title>
+    <link rel="stylesheet" href="{% static 'verified_users.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Verified Users</h2>
+        
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Date of Birth</th>
+                    <th>District</th>
+                    <th>Province</th>
+                    <th>City Name</th>
+                    <th>Parent Name</th>
+                    <th>Phone No</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in verified_users %}
+                    <tr>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.date_of_birth }}</td>
+                        <td>{{ user.district }}</td>
+                        <td>{{ user.province }}</td>
+                        <td>{{ user.city_name }}</td>
+                        <td>{{ user.parent_name }}</td>
+                        <td>{{ user.phone_number }}</td>
+                        <td>
+                            <button class="view-details-btn" onclick="showDetails('{{ user.id }}')">View Full Details</button>
+                        </td>
+                    </tr>
+
+                    <!-- Full Details Section (Hidden by Default) -->
+                    <tr id="details-{{ user.id }}" class="details-row" style="display: none;">
+                        <td colspan="8">
+                            <div class="details-content">
+                                <h3>Full Details</h3>
+                                <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+                                <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+                                <p><strong>District:</strong> {{ user.district }}</p>
+                                <p><strong>Province:</strong> {{ user.province }}</p>
+                                <p><strong>City Name:</strong> {{ user.city_name }}</p>
+                                <p><strong>Ward:</strong> {{ user.ward }}</p>
+                                <p><strong>Tole Name:</strong> {{ user.tole_name }}</p>
+                                <p><strong>Phone No:</strong> {{ user.phone_number }}</p>
+                                <p><strong>Parent Name:</strong> {{ user.parent_name }}</p>
+                                <p><strong>User Photo:</strong> <img src="{{ user.user_photo.url }}" alt="User Photo" class="photo-img" /></p>
+                                <p><strong>Birth Certificate:</strong> <img src="{{ user.birth_certificate.url }}" alt="Birth Certificate" class="photo-img" /></p>
+                                <p><strong>Citizenship (Front):</strong> <img src="{{ user.front_citizenship.url }}" alt="Citizenship Front" class="photo-img" /></p>
+                                <p><strong>Citizenship (Back):</strong> <img src="{{ user.back_citizenship.url }}" alt="Citizenship Back" class="photo-img" /></p>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8">No verified users.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'admin_verification_page' %}" class="admin-link">Go to Admin Verification Page</a>
+    </div>
+
+    <script>
+        function showDetails(userId) {
+            var detailsSection = document.getElementById('details-' + userId);
+            if (detailsSection.style.display === "none") {
+                detailsSection.style.display = "table-row";  // Display the full details row
+            } else {
+                detailsSection.style.display = "none";  // Hide the full details row
+            }
+        }
+    </script>
+</body>
+</html>

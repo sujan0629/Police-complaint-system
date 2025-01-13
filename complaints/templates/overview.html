@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crime Reporting System</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@1.0.1"></script>
+</head>
+<style>
+  .realTimeChart{
+    margin-left: 290px;
+    width : 700px;
+    height : 50%;
+    gap: 20px;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  .realTimeChart1{
+    margin-left: 1100px;
+    width : 300px;
+    height : 50%;
+    margin-top : -350px;
+    gap: 20px;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  .realTimeChart2{
+    margin-left: 290px;
+    width : 700px;
+    height : 50%;
+    gap: 20px;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: white;
+    margin-top : -50px;
+  }
+
+</style>
+<body>
+  <!-- Navigation Bar -->
+  <div id="nav-bar">
+    <input id="nav-toggle" type="checkbox"/>
+    <div id="nav-header">
+      <a id="nav-title" href="https://codepen.io" target="_blank">S<i class="fab fa-codepen"></i>aahas</a>
+      <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+      <hr/>
+    </div>
+    <div id="nav-content">
+      <a href="{% url 'pending_cases' %}" class="nav-button">
+        <i class="fas fa-palette"></i><span>View Pending Cases</span>
+      </a>
+      <a href="{% url 'admin_view_complaints' %}" class="nav-button">
+        <i class="fas fa-images"></i><span>View Complaint</span>
+      </a>
+      <a href="{% url 'completed_cases' %}" class="nav-button">
+        <i class="fas fa-images"></i><span>Completed Cases</span>
+      </a>
+      <a href="{% url 'admin_overview' %}" class="nav-button">
+        <i class="fas fa-images"></i><span>Overview</span>
+      </a>
+    </div>
+  </div>
+
+  <h1 style="margin-left: 290px;">Admin Overview :</h1>
+
+  <!-- Real-time Case Chart -->
+  <div class="realTimeChart">
+    <h2>Real-Time Case Count</h2>
+    <canvas id="realTimeChart" width="200" height="50"></canvas>
+    <script>
+      const realTimeCtx = document.getElementById('realTimeChart').getContext('2d');
+      const realTimeChart = new Chart(realTimeCtx, {
+        type: 'line',
+        data: {
+          labels: ['Yesterday', 'Today'],
+          datasets: [{
+            label: 'Number of Cases',
+            data: [{{ complaints_yesterday }}, {{ complaints_today }}],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+  </div>
+
+  <!-- Pie Chart for Incident Type Distribution -->
+  <div class="realTimeChart1">
+    <h2>Incident Type Distribution</h2>
+    <canvas id="pieChart" width="60" height="30"></canvas>
+    <script>
+      const pieCtx = document.getElementById('pieChart').getContext('2d');
+      const pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+          labels: [{% for incident in incident_types %}'{{ incident.incident_type }}',{% endfor %}],
+          datasets: [{
+            data: [{% for incident in incident_types %}{{ incident.total }},{% endfor %}],
+            backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#57FF33', '#5733FF'],
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script>
+  </div>
+
+  <!-- Bar Chart: Complaints per Year -->
+  <div class="realTimeChart2">
+    <h2>Complaints per Year (Current and Past Years)</h2>
+    <canvas id="barChart" width="400" height="200"></canvas>
+    <script>
+      const barCtx = document.getElementById('barChart').getContext('2d');
+      const barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Current Year', 'Previous Year', 'Year Before'],
+          datasets: [{
+            label: 'Number of Complaints',
+            data: [
+              {% if complaints_per_year|length >= 1 %}{{ complaints_per_year.0.total }}{% else %}0{% endif %},
+              {% if complaints_per_year|length >= 2 %}{{ complaints_per_year.1.total }}{% else %}0{% endif %},
+              {% if complaints_per_year|length >= 3 %}{{ complaints_per_year.2.total }}{% else %}0{% endif %}
+            ],
+            backgroundColor: ['#FF5733', '#33FF57', '#3357FF'],
+            borderColor: ['#FF5733', '#33FF57', '#3357FF'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+  </div>
+
+</body>
+</html>

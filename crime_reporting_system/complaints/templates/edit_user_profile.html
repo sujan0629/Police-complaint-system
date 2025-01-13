@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{% static 'edit_user_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <header class="profile-header">
+                <h2>Edit Your Profile</h2>
+            </header>
+
+            <div class="profile-details">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="full_name">Full Name:</label>
+                        <input type="text" name="full_name" id="full_name" value="{{ form.full_name.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_of_birth">Date of Birth:</label>
+                        <input type="date" name="date_of_birth" id="date_of_birth" value="{{ form.date_of_birth.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="province">Province:</label>
+                        <input type="text" name="province" id="province" value="{{ form.province.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">District:</label>
+                        <input type="text" name="district" id="district" value="{{ form.district.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city_name">City Name:</label>
+                        <input type="text" name="city_name" id="city_name" value="{{ form.city_name.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ward">Ward:</label>
+                        <input type="text" name="ward" id="ward" value="{{ form.ward.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tole_name">Tole Name:</label>
+                        <input type="text" name="tole_name" id="tole_name" value="{{ form.tole_name.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parent_name">Parent Name:</label>
+                        <input type="text" name="parent_name" id="parent_name" value="{{ form.parent_name.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number:</label>
+                        <input type="tel" name="phone_number" id="phone_number" value="{{ form.phone_number.value }}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_photo">Profile Photo:</label>
+                        <input type="file" name="user_photo" id="user_photo" class="form-control">
+                        {% if user_verification.user_photo %}
+                            <div class="current-photo">
+                                <strong>Current Photo:</strong>
+                                <img src="{{ user_verification.user_photo.url }}" alt="User Photo" width="150">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birth_certificate">Birth Certificate:</label>
+                        <input type="file" name="birth_certificate" id="birth_certificate" class="form-control">
+                        {% if user_verification.birth_certificate %}
+                            <div class="current-photo">
+                                <strong>Current Birth Certificate:</strong>
+                                <img src="{{ user_verification.birth_certificate.url }}" alt="Birth Certificate" width="100">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="front_citizenship">Citizenship Front:</label>
+                        <input type="file" name="front_citizenship" id="front_citizenship" class="form-control">
+                        {% if user_verification.front_citizenship %}
+                            <div class="current-photo">
+                                <strong>Current Citizenship (Front):</strong>
+                                <img src="{{ user_verification.front_citizenship.url }}" alt="Citizenship Front" width="100">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="back_citizenship">Citizenship Back:</label>
+                        <input type="file" name="back_citizenship" id="back_citizenship" class="form-control">
+                        {% if user_verification.back_citizenship %}
+                            <div class="current-photo">
+                                <strong>Current Citizenship (Back):</strong>
+                                <img src="{{ user_verification.back_citizenship.url }}" alt="Citizenship Back" width="100">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

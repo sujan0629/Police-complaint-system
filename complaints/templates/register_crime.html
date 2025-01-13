@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Crime Through AI</title>
+    <script>
+        // Speech Recognition setup
+        function startSpeechRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = function() {
+                console.log("Voice Assistant is listening...");
+            };
+
+            recognition.onerror = function(event) {
+                console.log("Error occurred in recognition: " + event.error);
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                processVoiceCommand(transcript);
+            };
+
+            recognition.start();
+        }
+
+        // Speech synthesis (TTS) function
+        function speak(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US';
+            window.speechSynthesis.speak(speech);
+        }
+
+        // Process user commands after listening
+        function processVoiceCommand(command) {
+            const assistant = document.getElementById('assistant-text');
+
+            if (command.includes("yes")) {
+                assistant.innerHTML = "Great! Let's proceed. Please tell me the type of the incident.";
+                speak("Great! Let's proceed. Please tell me the type of the incident.");
+                collectCrimeDetails();
+            } else if (command.includes("no")) {
+                window.location.href = "/";  // Redirect to homepage if user says "no"
+            } else {
+                assistant.innerHTML = "Sorry, I didn't understand. Please say 'yes' to register a crime or 'no' to cancel.";
+                speak("Sorry, I didn't understand. Please say 'yes' to register a crime or 'no' to cancel.");
+                startSpeechRecognition();  // Continue asking until a valid response
+            }
+        }
+
+        // Collect crime details from the user
+        function collectCrimeDetails() {
+            const assistant = document.getElementById('assistant-text');
+            let crimeDetails = {};
+
+            assistant.innerHTML = "What type of incident is it?";
+            speak("What type of incident is it?");
+            startSpeechRecognition();
+
+            // After collecting crime type, ask for other details (date, time, description)
+        }
+
+        function submitCrimeReport() {
+            // Send the gathered details to the backend (to save in database)
+            fetch('/voice-registered-case/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(crimeDetails),
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert('Crime reported successfully!');
+                      window.location.href = "/";  // Redirect after successful report
+                  }
+              });
+        }
+
+        window.onload = function() {
+            // When the page loads, the assistant greets the user and asks to register a crime
+            speak("Hello! Sir or Mam Welcome to the crime reporting system. Do want to report a crime ?");
+            document.getElementById('assistant-text').innerHTML = "Hello! How can I help you today?";
+
+            startSpeechRecognition(); // Start listening immediately
+        };
+    </script>
+</head>
+<body>
+    <h1>Voice Crime Reporting System</h1>
+    <p id="assistant-text"></p>
+</body>
+</html>

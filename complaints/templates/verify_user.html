@@ -1,0 +1,16 @@
+<!-- verify_user.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify User</title>
+</head>
+<body>
+    <h2>Verify User: {{ user_verification.full_name }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

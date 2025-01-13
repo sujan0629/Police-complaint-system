@@ -1,0 +1,200 @@
+<!-- complaints/templates/complaints/admin_view_complaints.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Complaints</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional: Additional custom styles -->
+    <style>
+        
+        body {
+            background-color: #f4f7fc;
+            padding-top: 50px;
+            
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #343a40;
+            font-weight: bold;
+            margin-bottom: 30px;
+            
+
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .modal-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 20px;
+        }
+
+        .modal-body {
+            font-size: 16px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Admin - View Complaints</h2>
+
+        <table class="table table-striped" style="width : 1000px;">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Date of Birth</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Incident Type</th>
+                    <th>Incident Date</th>
+                    <th>Username</th>
+                    <th>IP Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint.full_name }}</td>
+                        <td>{{ complaint.date_of_birth }}</td>
+                        <td>{{ complaint.age }}</td>
+                        <td>{{ complaint.get_gender_display }}</td>
+                        <td>{{ complaint.incident_type }}</td>
+                        <td>{{ complaint.incident_date }}</td>
+                        <td>{{ complaint.user.username }}</td>
+                        <td>{{ complaint.ip_address }}</td>
+                        <td>
+                            <!-- Full View Case Button -->
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#complaintModal{{ complaint.id }}">
+                                Full View Case
+                            </a>
+                            <!-- Update Status Button -->
+                            <form action="{% url 'update_complaint_status' complaint.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-warning">Update Status</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- Modal for Full View Case -->
+                    <div class="modal fade" id="complaintModal{{ complaint.id }}" tabindex="-1" role="dialog" aria-labelledby="complaintModalLabel{{ complaint.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="complaintModalLabel{{ complaint.id }}">Complaint Details</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Full Name:</strong> {{ complaint.full_name }}</p>
+                                    <p><strong>Date of Birth:</strong> {{ complaint.date_of_birth }}</p>
+                                    <p><strong>Age:</strong> {{ complaint.age }}</p>
+                                    <p><strong>Gender:</strong> {{ complaint.get_gender_display }}</p>
+                                    <p><strong>Phone Number:</strong> {{ complaint.phone_number }}</p>
+                                    <p><strong>Email:</strong> {{ complaint.email }}</p>
+                                    <p><strong>Parent Name:</strong> {{ complaint.parent_name }}</p>
+                                    <p><strong>Citizenship No:</strong> {{ complaint.citizenship_no }}</p>
+                                    <p><strong>Incident Type:</strong> {{ complaint.incident_type }}</p>
+                                    <p><strong>Incident Time:</strong> {{ complaint.incident_time }}</p>
+                                    <p><strong>Incident Date:</strong> {{ complaint.incident_date }}</p>
+                                    <p><strong>Incident Description:</strong> {{ complaint.incident_description }}</p>
+
+                                    <p><strong>Sound Recorder:</strong> 
+                                        {% if complaint.sound_recorder %}
+                                            <a href="{{ complaint.sound_recorder.url }}" target="_blank">Download</a>
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </p>
+
+                                    <p><strong>Upload Evidence 1:</strong> 
+                                        {% if complaint.evidence_1 %}
+                                            <a href="{{ complaint.evidence_1.url }}" target="_blank">Download</a>
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </p>
+
+                                    <p><strong>Upload Evidence 2:</strong> 
+                                        {% if complaint.evidence_2 %}
+                                            <a href="{{ complaint.evidence_2.url }}" target="_blank">Download</a>
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </p>
+
+                                    <p><strong>Upload Evidence 3:</strong> 
+                                        {% if complaint.evidence_3 %}
+                                            <a href="{{ complaint.evidence_3.url }}" target="_blank">Download</a>
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </p>
+
+                                    <p><strong>Upload Evidence 4:</strong> 
+                                        {% if complaint.evidence_4 %}
+                                            <a href="{{ complaint.evidence_4.url }}" target="_blank">Download</a>
+                                        {% else %}
+                                            Not available
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scripts for Bootstrap Modal -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

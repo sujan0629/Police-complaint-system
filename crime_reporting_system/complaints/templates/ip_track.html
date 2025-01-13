@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Location Tracker</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>IP Location Tracker</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="ip_address">Enter IP Address:</label>
+                <input type="text" class="form-control" id="ip_address" name="ip_address" value="{{ ip_address }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search IP Location</button>
+        </form>
+
+        {% if message %}
+            <div class="alert alert-info mt-3">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if latitude and longitude %}
+            <div class="mt-3">
+                <p><strong>Latitude:</strong> {{ latitude }}</p>
+                <p><strong>Longitude:</strong> {{ longitude }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
